@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loja de Vinil</title>
+    <style>
+        /* Estilos básicos para layout inicial */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #FFA500; /* Cor laranja para o fundo */
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #444;
+            padding: 1rem;
+        }
+
+        nav a {
+            color: #fff;
+            margin: 0 15px;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        .catalogo {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            padding: 1rem;
+            justify-content: center;
+        }
+
+        .vinil-item {
+            background-color: #fff;
+            border-radius: 5px;
+            padding: 1rem;
+            width: 200px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .vinil-item img {
+            max-width: 100%;
+            border-radius: 5px;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1rem;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Cabeçalho e navegação -->
+    <header>
+        <h1>Loja de Vinil</h1>
+    </header>
+
+    <nav>
+        <a href="#catalogo">Catálogo</a>
+        <a href="#sobre">Sobre Nós</a>
+        <a href="#contato">Contato</a>
+    </nav>
+
+    <!-- Seção de Catálogo -->
+    <section id="catalogo" class="catalogo">
+        <!-- Exemplo de item de vinil (os demais podem ser adicionados da mesma forma) -->
+        <div class="vinil-item">
+            <img src="https://drive.google.com/uc?export=view&id=SUA_ID_DE_IMAGEM" alt="Vinil 1">
+            <h3>Álbum Exemplo 1</h3>
+            <p>Artista Exemplo</p>
+            <p>Preço: R$50,00</p>
+            <button>Adicionar ao Carrinho</button>
+        </div>
+
+        <div class="vinil-item">
+            <img src="https://drive.google.com/uc?export=view&id=SUA_ID_DE_IMAGEM" alt="Vinil 2">
+            <h3>Álbum Exemplo 2</h3>
+            <p>Artista Exemplo</p>
+            <p>Preço: R$70,00</p>
+            <button>Adicionar ao Carrinho</button>
+        </div>
+        
+        <!-- Adicionar mais vinis conforme necessário -->
+    </section>
+
+    <!-- Seção Sobre Nós -->
+    <section id="sobre" style="padding: 2rem; text-align: center;">
+        <h2>Sobre Nós</h2>
+        <p>Somos uma loja dedicada a oferecer os melhores discos de vinil para amantes da música. Aqui, você encontra desde os clássicos até os lançamentos mais recentes.</p>
+    </section>
+
+    <!-- Seção Contato -->
+    <section id="contato" style="padding: 2rem; text-align: center;">
+        <h2>Contato</h2>
+        <p>Email: contato@lojadevinil.com</p>
+        <p>Telefone: (00) 1234-5678</p>
+    </section>
+
+    <!-- Rodapé -->
+    <footer>
+        <p>Loja de Vinil © 2024. Todos os direitos reservados.</p>
+    </footer>
+
+</body>
+</html>
