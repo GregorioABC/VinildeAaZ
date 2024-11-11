@@ -55,7 +55,7 @@
         .search-bar input[type="text"] {
             padding: 0.5rem;
             font-size: 1rem;
-            width: 450px; /* Aumentado para cobrir a largura desejada */
+            width: 450px;
             border: none;
             border-radius: 5px;
             background-color: #f5f5f5;
@@ -176,7 +176,7 @@
         <div class="header-content">
             <button class="menu-button" onclick="openMenu()">☰</button>
             <div class="search-bar">
-                <input type="text" id="search" placeholder="Pesquisar vinil...">
+                <input type="text" id="search" placeholder="Pesquisar vinil..." onkeyup="searchVinyls()">
             </div>
             <div class="sort-options">
                 <label for="sort">Ordenar por:</label>
@@ -273,36 +273,33 @@
         </div>
 
         <div class="vinil-item" data-price="180">
-            <img src="src/vinil9.jpeg" alt="Vinil 9">
-            <h3>A arte de Tim maia</h3>
-            <p>Tim Maia</p>
-            <p>Preço: R$80,00</p>
+            <img src="src/vinil9.jpg" alt="Vinil 9">
+            <h3>Almanaque</h3>
+            <p>Elis Regina</p>
+            <p>Preço: R$180,00</p>
             <button>Adicionar ao Carrinho</button>
         </div>
 
-        <div class="vinil-item" data-price="120">
-            <img src="src/vinil10.jpeg" alt="Vinil 10">
-            <h3>Promessa</h3>
-            <p>Alcione</p>
-            <p>Preço: R$120,00</p>
+        <div class="vinil-item" data-price="160">
+            <img src="src/vinil10.jpg" alt="Vinil 10">
+            <h3>Para Lennon e McCartney</h3>
+            <p>Milton Nascimento</p>
+            <p>Preço: R$160,00</p>
             <button>Adicionar ao Carrinho</button>
         </div>
     </section>
 
-    <!-- Seção Sobre -->
     <section id="sobre">
         <h2>Sobre Nós</h2>
-        <p>Somos uma loja especializada em vinis, com uma ampla coleção dos melhores álbuns de todos os tempos.</p>
-        <p><strong>E-mail:</strong> gregoriocavalcanti3@gmail.com</p>
-        <p><strong>Telefone:</strong> (81) 99280-5573</p>
-        <p><strong>Instagram:</strong> <a href="https://www.instagram.com/vinildeaaz/" target="_blank">vinilsaaz</a></p>
+        <p>Somos uma loja especializada em discos de vinil, trazendo clássicos e raridades para os amantes da música.</p>
     </section>
 
     <footer>
-        <p>&copy; 2024 Vinil de A a Z. Todos os direitos reservados.</p>
+        <p>Vinil de AaZ - Todos os direitos reservados &copy; 2024</p>
     </footer>
 
     <script>
+        // Funções do menu lateral
         function openMenu() {
             document.getElementById("side-menu").style.width = "250px";
         }
@@ -311,39 +308,54 @@
             document.getElementById("side-menu").style.width = "0";
         }
 
+        // Funções do carrossel de imagens
+        let currentSlide = 0;
+        const slides = document.querySelectorAll(".carousel img");
+
+        function showSlide(index) {
+            slides[currentSlide].classList.remove("active");
+            currentSlide = (index + slides.length) % slides.length;
+            slides[currentSlide].classList.add("active");
+        }
+
         function prevSlide() {
-            let current = document.querySelector(".carousel img.active");
-            current.classList.remove("active");
-            let prev = current.previousElementSibling || document.querySelector(".carousel img:last-child");
-            prev.classList.add("active");
+            showSlide(currentSlide - 1);
         }
 
         function nextSlide() {
-            let current = document.querySelector(".carousel img.active");
-            current.classList.remove("active");
-            let next = current.nextElementSibling || document.querySelector(".carousel img:first-child");
-            next.classList.add("active");
+            showSlide(currentSlide + 1);
         }
 
-        // Lógica para filtrar e ordenar vinis
+        // Função de pesquisa
+        function searchVinyls() {
+            const searchTerm = document.getElementById("search").value.toLowerCase();
+            const vinylItems = document.querySelectorAll(".vinil-item");
+
+            vinylItems.forEach(item => {
+                const title = item.querySelector("h3").innerText.toLowerCase();
+                item.style.display = title.includes(searchTerm) ? "block" : "none";
+            });
+        }
+
+        // Função para ordenar vinis
         function sortVinyls() {
-            let sortBy = document.getElementById('sort').value;
-            let vinylItems = Array.from(document.querySelectorAll('.vinil-item'));
+            const sortOrder = document.getElementById("sort").value;
+            const vinylContainer = document.getElementById("catalogo");
+            const vinylItems = Array.from(document.querySelectorAll(".vinil-item"));
 
             vinylItems.sort((a, b) => {
-                let priceA = parseFloat(a.getAttribute('data-price'));
-                let priceB = parseFloat(b.getAttribute('data-price'));
+                const priceA = parseInt(a.getAttribute("data-price"));
+                const priceB = parseInt(b.getAttribute("data-price"));
+                const titleA = a.querySelector("h3").innerText;
+                const titleB = b.querySelector("h3").innerText;
 
-                if (sortBy === "price-asc") return priceA - priceB;
-                if (sortBy === "price-desc") return priceB - priceA;
-                if (sortBy === "alphabetical") return a.querySelector('h3').innerText.localeCompare(b.querySelector('h3').innerText);
+                if (sortOrder === "price-asc") return priceA - priceB;
+                if (sortOrder === "price-desc") return priceB - priceA;
+                if (sortOrder === "alphabetical") return titleA.localeCompare(titleB);
             });
 
-            let catalogo = document.querySelector('.catalogo');
-            catalogo.innerHTML = '';
-            vinylItems.forEach(item => catalogo.appendChild(item));
+            vinylItems.forEach(item => vinylContainer.appendChild(item));
         }
     </script>
-
 </body>
 </html>
