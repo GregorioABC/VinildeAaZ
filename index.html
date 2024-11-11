@@ -19,10 +19,34 @@
             color: #fff;
             padding: 1rem;
             text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         header h1 {
             margin: 0;
+        }
+
+        /* Campo de pesquisa com lupa */
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background-color: #fff;
+            padding: 5px;
+            border-radius: 5px;
+        }
+
+        .search-bar input[type="text"] {
+            border: none;
+            padding: 5px;
+            outline: none;
+        }
+
+        .search-bar button {
+            background: none;
+            border: none;
+            cursor: pointer;
         }
 
         nav {
@@ -42,6 +66,49 @@
             text-decoration: underline;
         }
 
+        /* Carrossel */
+        .carousel {
+            width: 100%;
+            max-width: 800px;
+            margin: 20px auto;
+            overflow: hidden;
+            position: relative;
+            border-radius: 10px;
+        }
+
+        .carousel-images {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .carousel img {
+            width: 100%;
+            max-width: 800px;
+            border-radius: 10px;
+        }
+
+        /* Botões do carrossel */
+        .carousel-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .carousel-button.left {
+            left: 10px;
+        }
+
+        .carousel-button.right {
+            right: 10px;
+        }
+
+        /* Estilo dos itens de vinil */
         .catalogo {
             display: flex;
             flex-wrap: wrap;
@@ -74,12 +141,29 @@
             width: 100%;
         }
     </style>
+    <script>
+        // Função para o carrossel
+        let currentIndex = 0;
+        function showSlide(index) {
+            const slides = document.querySelectorAll('.carousel-images img');
+            if (index >= slides.length) currentIndex = 0;
+            else if (index < 0) currentIndex = slides.length - 1;
+            else currentIndex = index;
+            document.querySelector('.carousel-images').style.transform = `translateX(-${currentIndex * 100}%)`;
+        }
+    </script>
 </head>
 <body>
 
-    <!-- Cabeçalho e navegação -->
+    <!-- Cabeçalho com pesquisa e título -->
     <header>
         <h1>Vinil de A a Z</h1>
+        <div class="search-bar">
+            <input type="text" placeholder="Pesquisar...">
+            <button>
+                🔍
+            </button>
+        </div>
     </header>
 
     <nav>
@@ -88,9 +172,19 @@
         <a href="#contato">Contato</a>
     </nav>
 
+    <!-- Carrossel de Imagens -->
+    <div class="carousel">
+        <div class="carousel-images">
+            <img src="https://drive.google.com/uc?export=view&id=1ABCdef1ghIJ2klmNOP3qrstUVWX4yZ" alt="Imagem 1">
+            <img src="https://drive.google.com/uc?export=view&id=5aBCDdef1gHI2jklMNopQrsTUVwx4yz" alt="Imagem 2">
+            <img src="https://drive.google.com/uc?export=view&id=7xZYabcDEF3gh45IJ6KLmnoPqRSTuvw" alt="Imagem 3">
+        </div>
+        <button class="carousel-button left" onclick="showSlide(currentIndex - 1)">&#10094;</button>
+        <button class="carousel-button right" onclick="showSlide(currentIndex + 1)">&#10095;</button>
+    </div>
+
     <!-- Seção de Catálogo -->
     <section id="catalogo" class="catalogo">
-        <!-- Primeiros dois itens de vinil -->
         <div class="vinil-item">
             <img src="https://drive.google.com/uc?export=view&id=1dGwgYy70d9tlShkmOG56guWUww49u0qH" alt="Vinil 1">
             <h3>Sepultura Bestial Devastation</h3>
@@ -107,30 +201,7 @@
             <button>Adicionar ao Carrinho</button>
         </div>
 
-        <!-- Três novos itens de vinil -->
-        <div class="vinil-item">
-            <img src="https://drive.google.com/uc?export=view&id=1yZaDpGQwc9aeqKAl7gOYx8vQFjcNlq3M" alt="Vinil 3">
-            <h3>Back in Black</h3>
-            <p>AC/DC</p>
-            <p>Preço: R$120,00</p>
-            <button>Adicionar ao Carrinho</button>
-        </div>
-
-        <div class="vinil-item">
-            <img src="https://drive.google.com/uc?export=view&id=1Z56xRqTbG8YrG2jRl5UUmAl2Tp8NwP7x" alt="Vinil 4">
-            <h3>Thriller</h3>
-            <p>Michael Jackson</p>
-            <p>Preço: R$130,00</p>
-            <button>Adicionar ao Carrinho</button>
-        </div>
-
-        <div class="vinil-item">
-            <img src="https://drive.google.com/uc?export=view&id=1MhcNweIYmQ8Cl2Ef3g4Iq6U4vFJFL5An" alt="Vinil 5">
-            <h3>The Dark Side of the Moon</h3>
-            <p>Pink Floyd</p>
-            <p>Preço: R$140,00</p>
-            <button>Adicionar ao Carrinho</button>
-        </div>
+        <!-- Adicionar mais itens conforme necessário -->
     </section>
 
     <!-- Seção Sobre Nós -->
