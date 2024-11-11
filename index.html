@@ -15,15 +15,25 @@
 
         header {
             display: flex;
+            flex-direction: column;
             align-items: center;
             background-color: #333;
             color: #fff;
-            padding: 1rem;
-            justify-content: space-between;
+            padding: 2rem 0;
         }
 
         header h1 {
             margin: 0;
+            font-size: 2.5rem;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            padding: 0 2rem;
+            margin-top: 1rem;
         }
 
         .menu-button {
@@ -136,18 +146,21 @@
 <body>
 
     <header>
-        <button class="menu-button" onclick="openMenu()">☰</button>
         <h1>Vinil de A a Z</h1>
-        <div class="search-bar">
-            <input type="text" placeholder="Pesquisar vinil...">
-        </div>
-        <div class="sort-options">
-            <label for="sort">Ordenar por:</label>
-            <select id="sort" onchange="sortVinyls()">
-                <option value="price-asc">Menor preço</option>
-                <option value="price-desc">Maior preço</option>
-                <option value="alphabetical">Ordem alfabética</option>
-            </select>
+
+        <div class="header-content">
+            <button class="menu-button" onclick="openMenu()">☰</button>
+            <div class="search-bar">
+                <input type="text" placeholder="Pesquisar vinil...">
+            </div>
+            <div class="sort-options">
+                <label for="sort">Ordenar por:</label>
+                <select id="sort" onchange="sortVinyls()">
+                    <option value="price-asc">Menor preço</option>
+                    <option value="price-desc">Maior preço</option>
+                    <option value="alphabetical">Ordem alfabética</option>
+                </select>
+            </div>
         </div>
     </header>
 
@@ -185,7 +198,7 @@
         </div>
 
         <div class="vinil-item" data-price="200">
-            <img src="src/vinil3.jpeg" alt="Vinil 3">
+            <img src="src/vinil3.jpg" alt="Vinil 3">
             <h3>Dark Side of the Moon</h3>
             <p>Pink Floyd</p>
             <p>Preço: R$200,00</p>
@@ -264,10 +277,8 @@
                 }
             });
 
-            // Reorganiza os vinis no DOM
-            vinyls.forEach(vinyl => {
-                vinylsContainer.appendChild(vinyl);
-            });
+            // Atualiza a exibição dos vinis no DOM
+            vinyls.forEach(vinyl => vinylsContainer.appendChild(vinyl));
         }
     </script>
 
