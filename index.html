@@ -63,13 +63,16 @@
             background-color: #fff;
             border-radius: 5px;
             padding: 1rem;
-            width: 200px;
+            width: 180px;
             text-align: center;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-height: 320px; /* Limita a altura dos blocos */
+            overflow: hidden; /* Esconde qualquer conteúdo que ultrapasse a altura máxima */
         }
 
         .vinil-item img {
             max-width: 100%;
+            height: auto;
             border-radius: 5px;
         }
 
