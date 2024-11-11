@@ -30,7 +30,7 @@
         .header-content {
             display: flex;
             align-items: center;
-            justify-content: center; /* Alterado para centralizar */
+            justify-content: center;
             width: 100%;
             padding: 0 2rem;
             margin-top: 1rem;
@@ -55,17 +55,16 @@
         .search-bar input[type="text"] {
             padding: 0.5rem;
             font-size: 1rem;
-            width: 300px;
+            width: 500px; /* Aumentando o tamanho da barra de pesquisa */
             border: none;
             border-radius: 5px;
-            background-color: #f5f5f5; /* Cor de fundo mais clara */
+            background-color: #f5f5f5;
         }
 
         .sort-options {
             margin: 0 1rem;
         }
 
-        /* Estilos para o menu lateral */
         .side-menu {
             height: 100%;
             width: 0;
@@ -160,7 +159,7 @@
         <div class="header-content">
             <button class="menu-button" onclick="openMenu()">☰</button>
             <div class="search-bar">
-                <input type="text" placeholder="Pesquisar vinil...">
+                <input type="text" id="searchInput" placeholder="Pesquisar vinil..." oninput="searchVinyls()">
             </div>
             <div class="sort-options">
                 <label for="sort">Ordenar por:</label>
@@ -173,7 +172,6 @@
         </div>
     </header>
 
-    <!-- Menu lateral -->
     <div id="side-menu" class="side-menu">
         <a href="javascript:void(0)" class="close-btn" onclick="closeMenu()">×</a>
         <a href="#catalogo">Catálogo</a>
@@ -190,7 +188,7 @@
     </div>
 
     <section id="catalogo" class="catalogo">
-        <div class="vinil-item" data-price="150">
+        <div class="vinil-item" data-price="150" data-name="Bestial Devastation">
             <img src="src/vinil1.jpg" alt="Vinil 1">
             <h3>Bestial Devastation</h3>
             <p>Sepultura</p>
@@ -198,7 +196,7 @@
             <button>Adicionar ao Carrinho</button>
         </div>
 
-        <div class="vinil-item" data-price="70">
+        <div class="vinil-item" data-price="70" data-name="Asas da América">
             <img src="src/vinil2.jpg" alt="Vinil 2">
             <h3>Asas da América</h3>
             <p>Alceu Valença</p>
@@ -206,7 +204,7 @@
             <button>Adicionar ao Carrinho</button>
         </div>
 
-        <div class="vinil-item" data-price="200">
+        <div class="vinil-item" data-price="200" data-name="Falso Brilhante">
             <img src="src/vinil3.jpeg" alt="Vinil 3">
             <h3>Falso Brilhante</h3>
             <p>Elis Regina</p>
@@ -214,7 +212,7 @@
             <button>Adicionar ao Carrinho</button>
         </div>
 
-        <div class="vinil-item" data-price="180">
+        <div class="vinil-item" data-price="180" data-name="Abbey Road">
             <img src="src/vinil4.jpg" alt="Vinil 4">
             <h3>Abbey Road</h3>
             <p>The Beatles</p>
@@ -222,7 +220,7 @@
             <button>Adicionar ao Carrinho</button>
         </div>
 
-        <div class="vinil-item" data-price="220">
+        <div class="vinil-item" data-price="220" data-name="Thriller">
             <img src="src/vinil5.jpg" alt="Vinil 5">
             <h3>Thriller</h3>
             <p>Michael Jackson</p>
@@ -268,28 +266,37 @@
         // Função para ordenar os vinis
         function sortVinyls() {
             const sortBy = document.getElementById("sort").value;
-            const vinylsContainer = document.getElementById("catalogo");
-            const vinyls = Array.from(vinylsContainer.getElementsByClassName("vinil-item"));
+            const catalogo = document.querySelector(".catalogo");
+            const vinylItems = Array.from(catalogo.getElementsByClassName("vinil-item"));
 
-            vinyls.sort((a, b) => {
-                const priceA = parseFloat(a.getAttribute("data-price"));
-                const priceB = parseFloat(b.getAttribute("data-price"));
-                const nameA = a.querySelector("h3").innerText.toLowerCase();
-                const nameB = b.querySelector("h3").innerText.toLowerCase();
-
-                switch (sortBy) {
-                    case "price-asc":
-                        return priceA - priceB;
-                    case "price-desc":
-                        return priceB - priceA;
-                    case "alphabetical":
-                        return nameA.localeCompare(nameB);
-                    default:
-                        return 0;
+            vinylItems.sort((a, b) => {
+                if (sortBy === "price-asc") {
+                    return a.dataset.price - b.dataset.price;
+                } else if (sortBy === "price-desc") {
+                    return b.dataset.price - a.dataset.price;
+                } else if (sortBy === "alphabetical") {
+                    return a.dataset.name.localeCompare(b.dataset.name);
                 }
             });
 
-            vinyls.forEach(vinyl => vinylsContainer.appendChild(vinyl));
+            vinylItems.forEach(item => catalogo.appendChild(item));
+        }
+
+        // Função de pesquisa
+        function searchVinyls() {
+            const searchTerm = document.getElementById("searchInput").value.toLowerCase();
+            const vinylItems = document.querySelectorAll(".vinil-item");
+
+            vinylItems.forEach(item => {
+                const title = item.querySelector("h3").textContent.toLowerCase();
+                const artist = item.querySelector("p").textContent.toLowerCase();
+
+                if (title.includes(searchTerm) || artist.includes(searchTerm)) {
+                    item.style.display = "";
+                } else {
+                    item.style.display = "none";
+                }
+            });
         }
     </script>
 </body>
