@@ -146,9 +146,7 @@
         let currentIndex = 0;
         function showSlide(index) {
             const slides = document.querySelectorAll('.carousel-images img');
-            if (index >= slides.length) currentIndex = 0;
-            else if (index < 0) currentIndex = slides.length - 1;
-            else currentIndex = index;
+            currentIndex = (index + slides.length) % slides.length;
             document.querySelector('.carousel-images').style.transform = `translateX(-${currentIndex * 100}%)`;
         }
     </script>
@@ -201,7 +199,29 @@
             <button>Adicionar ao Carrinho</button>
         </div>
 
-        <!-- Adicionar mais itens conforme necessário -->
+        <div class="vinil-item">
+            <img src="https://drive.google.com/uc?export=view&id=7abCdEFgHIJ8KlMNoPrsTuvwXYZaBCd" alt="Vinil 3">
+            <h3>Thriller</h3>
+            <p>Michael Jackson</p>
+            <p>Preço: R$200,00</p>
+            <button>Adicionar ao Carrinho</button>
+        </div>
+
+        <div class="vinil-item">
+            <img src="https://drive.google.com/uc?export=view&id=8yzWXYZAbcD2EfGhIJkLmNopQRstUVx" alt="Vinil 4">
+            <h3>The Dark Side of the Moon</h3>
+            <p>Pink Floyd</p>
+            <p>Preço: R$180,00</p>
+            <button>Adicionar ao Carrinho</button>
+        </div>
+
+        <div class="vinil-item">
+            <img src="https://drive.google.com/uc?export=view&id=9opQRsTVuwXyZabCDeFgHiJKLMnPqrt" alt="Vinil 5">
+            <h3>Abbey Road</h3>
+            <p>The Beatles</p>
+            <p>Preço: R$220,00</p>
+            <button>Adicionar ao Carrinho</button>
+        </div>
     </section>
 
     <!-- Seção Sobre Nós -->
