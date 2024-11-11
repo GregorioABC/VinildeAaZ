@@ -5,71 +5,106 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vinil de AaZ</title>
     <style>
-        /* Estilos básicos para layout inicial */
         body {
             font-family: Arial, sans-serif;
-            background-color: #FFA500; /* Cor laranja para o fundo */
+            background-color: #FFA500;
             color: #333;
             margin: 0;
             padding: 0;
         }
 
         header {
-            background-color: #D2B48C; /* Cor marrom claro para o fundo */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #333;
             color: #fff;
             padding: 2rem 0;
-            text-align: center;
         }
 
         header h1 {
             margin: 0;
-            font-size: 2rem;
+            font-size: 2.5rem;
         }
 
-        /* Centralizando a barra de pesquisa */
-        .search-bar {
-            margin: 20px 0;
+        .header-content {
             display: flex;
-            justify-content: center;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            padding: 0 2rem;
+            margin-top: 1rem;
         }
 
-        .search-bar input {
-            width: 50%;
-            padding: 0.5rem;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            font-size: 1rem;
-            outline: none;
-        }
-
-        .search-bar button {
-            padding: 0.5rem 1rem;
+        .menu-button {
+            font-size: 1.5rem;
+            background: none;
             border: none;
-            background-color: #333;
-            color: #fff;
-            border-radius: 5px;
+            color: white;
             cursor: pointer;
         }
 
-        .search-bar button:hover {
+        .search-bar input[type="text"] {
+            padding: 0.5rem;
+            font-size: 1rem;
+            width: 300px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .sort-options {
+            margin: 0 1rem;
+        }
+
+        /* Estilos para o menu lateral */
+        .side-menu {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            top: 0;
+            left: 0;
             background-color: #444;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
         }
 
-        nav {
-            display: flex;
-            justify-content: center;
-            background-color: #D2B48C; /* Cor marrom claro */
-            padding: 1rem;
-        }
-
-        nav a {
-            color: #fff;
-            margin: 0 15px;
+        .side-menu a {
+            padding: 10px 15px;
             text-decoration: none;
+            font-size: 1.2rem;
+            color: #fff;
+            display: block;
+            transition: 0.3s;
         }
 
-        nav a:hover {
-            text-decoration: underline;
+        .side-menu a:hover {
+            background-color: #333;
+        }
+
+        .side-menu .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 2rem;
+        }
+
+        .carousel {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin: 1rem;
+        }
+
+        .carousel img {
+            max-width: 100%;
+            height: 200px;
+            display: none;
+        }
+
+        .carousel img.active {
+            display: block;
         }
 
         .catalogo {
@@ -84,18 +119,21 @@
             background-color: #fff;
             border-radius: 5px;
             padding: 1rem;
-            width: 200px;
+            width: 180px;
             text-align: center;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-height: 320px;
+            overflow: hidden;
         }
 
         .vinil-item img {
             max-width: 100%;
+            height: auto;
             border-radius: 5px;
         }
 
         footer {
-            background-color: #D2B48C; /* Cor marrom claro */
+            background-color: #333;
             color: #fff;
             text-align: center;
             padding: 1rem;
@@ -107,85 +145,142 @@
 </head>
 <body>
 
-    <!-- Cabeçalho -->
     <header>
         <h1>Vinil de A a Z</h1>
+
+        <div class="header-content">
+            <button class="menu-button" onclick="openMenu()">☰</button>
+            <div class="search-bar">
+                <input type="text" placeholder="Pesquisar vinil...">
+            </div>
+            <div class="sort-options">
+                <label for="sort">Ordenar por:</label>
+                <select id="sort" onchange="sortVinyls()">
+                    <option value="price-asc">Menor preço</option>
+                    <option value="price-desc">Maior preço</option>
+                    <option value="alphabetical">Ordem alfabética</option>
+                </select>
+            </div>
+        </div>
     </header>
 
-    <!-- Barra de Pesquisa -->
-    <div class="search-bar">
-        <input type="text" placeholder="Pesquise por vinil...">
-        <button>Pesquisar</button>
-    </div>
-
-    <!-- Navegação -->
-    <nav>
+    <!-- Menu lateral -->
+    <div id="side-menu" class="side-menu">
+        <a href="javascript:void(0)" class="close-btn" onclick="closeMenu()">×</a>
         <a href="#catalogo">Catálogo</a>
         <a href="#sobre">Sobre Nós</a>
         <a href="#contato">Contato</a>
-    </nav>
+    </div>
 
-    <!-- Seção de Catálogo -->
+    <div class="carousel">
+        <button onclick="prevSlide()">◀</button>
+        <img src="src/imagem1.jpg" alt="Imagem 1" class="active">
+        <img src="src/imagem2.jpg" alt="Imagem 2">
+        <img src="src/imagem3.jpg" alt="Imagem 3">
+        <button onclick="nextSlide()">▶</button>
+    </div>
+
     <section id="catalogo" class="catalogo">
-        <div class="vinil-item">
-            <img src="imagens/vinil1.jpg" alt="Vinil 1">
-            <h3>Sepultura Bestial Devastation</h3>
+        <div class="vinil-item" data-price="150">
+            <img src="src/vinil1.jpg" alt="Vinil 1">
+            <h3>Bestial Devastation</h3>
             <p>Sepultura</p>
             <p>Preço: R$150,00</p>
             <button>Adicionar ao Carrinho</button>
         </div>
 
-        <div class="vinil-item">
-            <img src="imagens/vinil2.jpg" alt="Vinil 2">
-            <h3>Asas da America Frevo</h3>
+        <div class="vinil-item" data-price="70">
+            <img src="src/vinil2.jpg" alt="Vinil 2">
+            <h3>Asas da América Frevo</h3>
             <p>Alceu Valença</p>
             <p>Preço: R$70,00</p>
             <button>Adicionar ao Carrinho</button>
         </div>
 
-        <div class="vinil-item">
-            <img src="imagens/vinil3.jpeg" alt="Vinil 3">
+        <div class="vinil-item" data-price="200">
+            <img src="src/vinil3.jpeg" alt="Vinil 3">
             <h3>Falso Brilhante</h3>
-            <p>Elis regina</p>
-            <p>Preço: R$100,00</p>
+            <p>Elis Regina</p>
+            <p>Preço: R$180,00</p>
             <button>Adicionar ao Carrinho</button>
         </div>
 
-        <div class="vinil-item">
-            <img src="imagens/vinil4.jpg" alt="Vinil 4">
+        <div class="vinil-item" data-price="180">
+            <img src="src/vinil4.jpg" alt="Vinil 4">
             <h3>Abbey Road</h3>
-            <p>The Beattles</p>
-            <p>Preço: R$200,00</p>
+            <p>The Beatles</p>
+            <p>Preço: R$180,00</p>
             <button>Adicionar ao Carrinho</button>
         </div>
 
-        <div class="vinil-item">
-            <img src="imagens/vinil5.jpg" alt="Vinil 5">
+        <div class="vinil-item" data-price="220">
+            <img src="src/vinil5.jpg" alt="Vinil 5">
             <h3>Thriller</h3>
-            <p>Michael jackson</p>
+            <p>Michael Jackson</p>
             <p>Preço: R$220,00</p>
             <button>Adicionar ao Carrinho</button>
         </div>
-
     </section>
 
-    <!-- Seção Sobre Nós -->
-    <section id="sobre" style="padding: 2rem; text-align: center;">
-        <h2>Sobre Nós</h2>
-        <p>Somos uma loja dedicada a oferecer os melhores discos de vinil para amantes da música. Aqui, você encontra desde os clássicos até os lançamentos mais recentes.</p>
-    </section>
-
-    <!-- Seção Contato -->
-    <section id="contato" style="padding: 2rem; text-align: center;">
-        <h2>Contato</h2>
-        <p>Email: contato@lojadevinil.com</p>
-        <p>Telefone: (00) 1234-5678</p>
-    </section>
-
-    <!-- Rodapé -->
     <footer>
         <p>Loja de Vinil © 2024. Todos os direitos reservados.</p>
     </footer>
+
+    <script>
+        // Funções para abrir e fechar o menu lateral
+        function openMenu() {
+            document.getElementById("side-menu").style.width = "250px";
+        }
+
+        function closeMenu() {
+            document.getElementById("side-menu").style.width = "0";
+        }
+
+        // Código do carrossel
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.carousel img');
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === index);
+            });
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        // Função para ordenar os vinis
+        function sortVinyls() {
+            const sortBy = document.getElementById("sort").value;
+            const vinylsContainer = document.getElementById("catalogo");
+            const vinyls = Array.from(vinylsContainer.getElementsByClassName("vinil-item"));
+
+            vinyls.sort((a, b) => {
+                const priceA = parseFloat(a.getAttribute("data-price"));
+                const priceB = parseFloat(b.getAttribute("data-price"));
+                const nameA = a.querySelector("h3").innerText.toLowerCase();
+                const nameB = b.querySelector("h3").innerText.toLowerCase();
+
+                if (sortBy === "price-asc") {
+                    return priceA - priceB;
+                } else if (sortBy === "price-desc") {
+                    return priceB - priceA;
+                } else if (sortBy === "alphabetical") {
+                    return nameA.localeCompare(nameB);
+                }
+            });
+
+            // Atualiza a exibição dos vinis no DOM
+            vinyls.forEach(vinyl => vinylsContainer.appendChild(vinyl));
+        }
+    </script>
 
 </body>
 </html>
