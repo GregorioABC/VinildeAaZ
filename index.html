@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vinil de A a Z</title>
+    <title>Vinil de AaZ</title>
     <style>
-        /* Estilos básicos para layout inicial */
         body {
             font-family: Arial, sans-serif;
-            background-color: #FFA500; /* Cor laranja para o fundo */
+            background-color: #FFA500;
             color: #333;
             margin: 0;
             padding: 0;
@@ -19,34 +18,6 @@
             color: #fff;
             padding: 1rem;
             text-align: center;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        header h1 {
-            margin: 0;
-        }
-
-        /* Campo de pesquisa com lupa */
-        .search-bar {
-            display: flex;
-            align-items: center;
-            background-color: #fff;
-            padding: 5px;
-            border-radius: 5px;
-        }
-
-        .search-bar input[type="text"] {
-            border: none;
-            padding: 5px;
-            outline: none;
-        }
-
-        .search-bar button {
-            background: none;
-            border: none;
-            cursor: pointer;
         }
 
         nav {
@@ -62,53 +33,24 @@
             text-decoration: none;
         }
 
-        nav a:hover {
-            text-decoration: underline;
-        }
-
-        /* Carrossel */
         .carousel {
-            width: 100%;
-            max-width: 800px;
-            margin: 20px auto;
-            overflow: hidden;
-            position: relative;
-            border-radius: 10px;
-        }
-
-        .carousel-images {
             display: flex;
-            transition: transform 0.5s ease;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin: 1rem;
         }
 
         .carousel img {
-            width: 100%;
-            max-width: 800px;
-            border-radius: 10px;
+            max-width: 100%;
+            height: 300px;
+            display: none;
         }
 
-        /* Botões do carrossel */
-        .carousel-button {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background-color: rgba(0, 0, 0, 0.5);
-            color: #fff;
-            border: none;
-            padding: 10px;
-            cursor: pointer;
-            font-size: 18px;
+        .carousel img.active {
+            display: block;
         }
 
-        .carousel-button.left {
-            left: 10px;
-        }
-
-        .carousel-button.right {
-            right: 10px;
-        }
-
-        /* Estilo dos itens de vinil */
         .catalogo {
             display: flex;
             flex-wrap: wrap;
@@ -131,6 +73,18 @@
             border-radius: 5px;
         }
 
+        .search-bar {
+            display: flex;
+            justify-content: center;
+            margin: 1rem;
+        }
+
+        .search-bar input[type="text"] {
+            padding: 0.5rem;
+            font-size: 1rem;
+            width: 300px;
+        }
+
         footer {
             background-color: #333;
             color: #fff;
@@ -141,27 +95,11 @@
             width: 100%;
         }
     </style>
-    <script>
-        // Função para o carrossel
-        let currentIndex = 0;
-        function showSlide(index) {
-            const slides = document.querySelectorAll('.carousel-images img');
-            currentIndex = (index + slides.length) % slides.length;
-            document.querySelector('.carousel-images').style.transform = `translateX(-${currentIndex * 100}%)`;
-        }
-    </script>
 </head>
 <body>
 
-    <!-- Cabeçalho com pesquisa e título -->
     <header>
         <h1>Vinil de A a Z</h1>
-        <div class="search-bar">
-            <input type="text" placeholder="Pesquisar...">
-            <button>
-                🔍
-            </button>
-        </div>
     </header>
 
     <nav>
@@ -170,21 +108,21 @@
         <a href="#contato">Contato</a>
     </nav>
 
-    <!-- Carrossel de Imagens -->
     <div class="carousel">
-        <div class="carousel-images">
-            <img src="carrossel1.jpg" alt="Imagem 1">
-            <img src="carrossel2.jpg" alt="Imagem 2">
-            <img src="carrossel3.jpg" alt="Imagem 3">
-        </div>
-        <button class="carousel-button left" onclick="showSlide(currentIndex - 1)">&#10094;</button>
-        <button class="carousel-button right" onclick="showSlide(currentIndex + 1)">&#10095;</button>
+        <button onclick="prevSlide()">◀</button>
+        <img src="src/imagem1.jpg" alt="Imagem 1" class="active">
+        <img src="src/imagem2.jpg" alt="Imagem 2">
+        <img src="src/imagem3.jpg" alt="Imagem 3">
+        <button onclick="nextSlide()">▶</button>
     </div>
 
-    <!-- Seção de Catálogo -->
+    <div class="search-bar">
+        <input type="text" placeholder="Pesquisar vinil...">
+    </div>
+
     <section id="catalogo" class="catalogo">
         <div class="vinil-item">
-            <img src="vinil1.jpg" alt="Vinil 1">
+            <img src="src/vinil1.jpg" alt="Vinil 1">
             <h3>Sepultura Bestial Devastation</h3>
             <p>Sepultura</p>
             <p>Preço: R$150,00</p>
@@ -192,55 +130,40 @@
         </div>
 
         <div class="vinil-item">
-            <img src="vinil2.jpg" alt="Vinil 2">
+            <img src="src/vinil2.jpg" alt="Vinil 2">
             <h3>Asas da América Frevo</h3>
             <p>Alceu Valença</p>
             <p>Preço: R$70,00</p>
             <button>Adicionar ao Carrinho</button>
         </div>
 
-        <div class="vinil-item">
-            <img src="vinil3.jpg" alt="Vinil 3">
-            <h3>Thriller</h3>
-            <p>Michael Jackson</p>
-            <p>Preço: R$200,00</p>
-            <button>Adicionar ao Carrinho</button>
-        </div>
-
-        <div class="vinil-item">
-            <img src="vinil4.jpg" alt="Vinil 4">
-            <h3>The Dark Side of the Moon</h3>
-            <p>Pink Floyd</p>
-            <p>Preço: R$180,00</p>
-            <button>Adicionar ao Carrinho</button>
-        </div>
-
-        <div class="vinil-item">
-            <img src="vinil5.jpg" alt="Vinil 5">
-            <h3>Abbey Road</h3>
-            <p>The Beatles</p>
-            <p>Preço: R$220,00</p>
-            <button>Adicionar ao Carrinho</button>
-        </div>
+        <!-- Adicione mais vinis conforme necessário -->
     </section>
 
-    <!-- Seção Sobre Nós -->
-    <section id="sobre" style="padding: 2rem; text-align: center;">
-        <h2>Sobre Nós</h2>
-        <p>Somos uma loja dedicada a oferecer os melhores discos de vinil para amantes da música. Aqui, você encontra desde os clássicos até os lançamentos mais recentes.</p>
-    </section>
-
-    <!-- Seção Contato -->
-    <section id="contato" style="padding: 2rem; text-align: center;">
-        <h2>Contato</h2>
-        <p>Email: gregoriocavalcanti3@gmail.com</p>
-        <p>Telefone: (81) 992807355</p>
-    </section>
-
-    <!-- Rodapé -->
     <footer>
         <p>Loja de Vinil © 2024. Todos os direitos reservados.</p>
     </footer>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.carousel img');
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === index);
+            });
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            showSlide(currentSlide);
+        }
+    </script>
 
 </body>
 </html>
