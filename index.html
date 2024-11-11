@@ -116,11 +116,11 @@
         }
 
         .catalogo {
-            display: flex;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* 2 colunas */
             gap: 1rem;
             padding: 1rem;
-            justify-content: center;
+            justify-items: center;
         }
 
         .vinil-item {
@@ -206,7 +206,7 @@
     </div>
 
     <section id="catalogo" class="catalogo">
-        <!-- Os 5 vinis já existentes -->
+        <!-- 10 vinis dispostos em 5x2 -->
         <div class="vinil-item" data-price="150">
             <img src="src/vinil1.jpg" alt="Vinil 1">
             <h3>Bestial Devastation</h3>
@@ -247,7 +247,7 @@
             <button>Adicionar ao Carrinho</button>
         </div>
 
-        <!-- Novos 5 vinis -->
+        <!-- Segunda linha de vinis -->
         <div class="vinil-item" data-price="130">
             <img src="src/vinil6.jpg" alt="Vinil 6">
             <h3>Dark Side of the Moon</h3>
