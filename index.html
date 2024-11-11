@@ -14,23 +14,65 @@
         }
 
         header {
+            display: flex;
+            align-items: center;
             background-color: #333;
             color: #fff;
             padding: 1rem;
-            text-align: center;
+            justify-content: space-between;
         }
 
-        nav {
-            display: flex;
-            justify-content: center;
+        header h1 {
+            margin: 0;
+        }
+
+        .menu-button {
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+
+        .search-bar input[type="text"] {
+            padding: 0.5rem;
+            font-size: 1rem;
+            width: 300px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        /* Estilos para o menu lateral */
+        .side-menu {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            top: 0;
+            left: 0;
             background-color: #444;
-            padding: 1rem;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
         }
 
-        nav a {
-            color: #fff;
-            margin: 0 15px;
+        .side-menu a {
+            padding: 10px 15px;
             text-decoration: none;
+            font-size: 1.2rem;
+            color: #fff;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .side-menu a:hover {
+            background-color: #333;
+        }
+
+        .side-menu .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 2rem;
         }
 
         .carousel {
@@ -66,26 +108,14 @@
             width: 180px;
             text-align: center;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            max-height: 320px; /* Limita a altura dos blocos */
-            overflow: hidden; /* Esconde qualquer conteúdo que ultrapasse a altura máxima */
+            max-height: 320px;
+            overflow: hidden;
         }
 
         .vinil-item img {
             max-width: 100%;
             height: auto;
             border-radius: 5px;
-        }
-
-        .search-bar {
-            display: flex;
-            justify-content: center;
-            margin: 1rem;
-        }
-
-        .search-bar input[type="text"] {
-            padding: 0.5rem;
-            font-size: 1rem;
-            width: 300px;
         }
 
         footer {
@@ -102,14 +132,20 @@
 <body>
 
     <header>
+        <button class="menu-button" onclick="openMenu()">☰</button>
         <h1>Vinil de A a Z</h1>
+        <div class="search-bar">
+            <input type="text" placeholder="Pesquisar vinil...">
+        </div>
     </header>
 
-    <nav>
+    <!-- Menu lateral -->
+    <div id="side-menu" class="side-menu">
+        <a href="javascript:void(0)" class="close-btn" onclick="closeMenu()">×</a>
         <a href="#catalogo">Catálogo</a>
         <a href="#sobre">Sobre Nós</a>
         <a href="#contato">Contato</a>
-    </nav>
+    </div>
 
     <div class="carousel">
         <button onclick="prevSlide()">◀</button>
@@ -117,10 +153,6 @@
         <img src="src/imagem2.jpg" alt="Imagem 2">
         <img src="src/imagem3.jpg" alt="Imagem 3">
         <button onclick="nextSlide()">▶</button>
-    </div>
-
-    <div class="search-bar">
-        <input type="text" placeholder="Pesquisar vinil...">
     </div>
 
     <section id="catalogo" class="catalogo">
@@ -170,6 +202,16 @@
     </footer>
 
     <script>
+        // Funções para abrir e fechar o menu lateral
+        function openMenu() {
+            document.getElementById("side-menu").style.width = "250px";
+        }
+
+        function closeMenu() {
+            document.getElementById("side-menu").style.width = "0";
+        }
+
+        // Código do carrossel
         let currentSlide = 0;
         const slides = document.querySelectorAll('.carousel img');
 
