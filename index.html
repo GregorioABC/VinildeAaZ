@@ -42,6 +42,10 @@
             border-radius: 5px;
         }
 
+        .sort-options {
+            margin: 0 1rem;
+        }
+
         /* Estilos para o menu lateral */
         .side-menu {
             height: 100%;
@@ -137,6 +141,14 @@
         <div class="search-bar">
             <input type="text" placeholder="Pesquisar vinil...">
         </div>
+        <div class="sort-options">
+            <label for="sort">Ordenar por:</label>
+            <select id="sort" onchange="sortVinyls()">
+                <option value="price-asc">Menor preço</option>
+                <option value="price-desc">Maior preço</option>
+                <option value="alphabetical">Ordem alfabética</option>
+            </select>
+        </div>
     </header>
 
     <!-- Menu lateral -->
@@ -156,7 +168,7 @@
     </div>
 
     <section id="catalogo" class="catalogo">
-        <div class="vinil-item">
+        <div class="vinil-item" data-price="150">
             <img src="src/vinil1.jpg" alt="Vinil 1">
             <h3>Sepultura Bestial Devastation</h3>
             <p>Sepultura</p>
@@ -164,7 +176,7 @@
             <button>Adicionar ao Carrinho</button>
         </div>
 
-        <div class="vinil-item">
+        <div class="vinil-item" data-price="70">
             <img src="src/vinil2.jpg" alt="Vinil 2">
             <h3>Asas da América Frevo</h3>
             <p>Alceu Valença</p>
@@ -172,15 +184,15 @@
             <button>Adicionar ao Carrinho</button>
         </div>
 
-        <div class="vinil-item">
+        <div class="vinil-item" data-price="200">
             <img src="src/vinil3.jpeg" alt="Vinil 3">
-            <h3>Falso brilhante</h3>
-            <p>Elis Regina</p>
-            <p>Preço: R$130,00</p>
+            <h3>Dark Side of the Moon</h3>
+            <p>Pink Floyd</p>
+            <p>Preço: R$200,00</p>
             <button>Adicionar ao Carrinho</button>
         </div>
 
-        <div class="vinil-item">
+        <div class="vinil-item" data-price="180">
             <img src="src/vinil4.jpg" alt="Vinil 4">
             <h3>Abbey Road</h3>
             <p>The Beatles</p>
@@ -188,7 +200,7 @@
             <button>Adicionar ao Carrinho</button>
         </div>
 
-        <div class="vinil-item">
+        <div class="vinil-item" data-price="220">
             <img src="src/vinil5.jpg" alt="Vinil 5">
             <h3>Thriller</h3>
             <p>Michael Jackson</p>
@@ -229,6 +241,33 @@
         function prevSlide() {
             currentSlide = (currentSlide - 1 + slides.length) % slides.length;
             showSlide(currentSlide);
+        }
+
+        // Função para ordenar os vinis
+        function sortVinyls() {
+            const sortBy = document.getElementById("sort").value;
+            const vinylsContainer = document.getElementById("catalogo");
+            const vinyls = Array.from(vinylsContainer.getElementsByClassName("vinil-item"));
+
+            vinyls.sort((a, b) => {
+                const priceA = parseFloat(a.getAttribute("data-price"));
+                const priceB = parseFloat(b.getAttribute("data-price"));
+                const nameA = a.querySelector("h3").innerText.toLowerCase();
+                const nameB = b.querySelector("h3").innerText.toLowerCase();
+
+                if (sortBy === "price-asc") {
+                    return priceA - priceB;
+                } else if (sortBy === "price-desc") {
+                    return priceB - priceA;
+                } else if (sortBy === "alphabetical") {
+                    return nameA.localeCompare(nameB);
+                }
+            });
+
+            // Reorganiza os vinis no DOM
+            vinyls.forEach(vinyl => {
+                vinylsContainer.appendChild(vinyl);
+            });
         }
     </script>
 
