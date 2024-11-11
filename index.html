@@ -274,32 +274,28 @@
 
         <div class="vinil-item" data-price="180">
             <img src="src/vinil9.jpeg" alt="Vinil 9">
-            <h3>A arte de Tim maia</h3>
-            <p>Tim Maia</p>
-            <p>Preço: R$80,00</p>
+            <h3>40 anos ao vivo</h3>
+            <p>Raul Seixas</p>
+            <p>Preço: R$180,00</p>
             <button>Adicionar ao Carrinho</button>
         </div>
 
-        <div class="vinil-item" data-price="120">
+        <div class="vinil-item" data-price="150">
             <img src="src/vinil10.jpeg" alt="Vinil 10">
-            <h3>Promessa</h3>
-            <p>Alcione</p>
-            <p>Preço: R$120,00</p>
+            <h3>O álbum branco</h3>
+            <p>Os Beatles</p>
+            <p>Preço: R$150,00</p>
             <button>Adicionar ao Carrinho</button>
         </div>
     </section>
 
-    <!-- Seção Sobre -->
     <section id="sobre">
         <h2>Sobre Nós</h2>
-        <p>Somos uma loja especializada em vinis, com uma ampla coleção dos melhores álbuns de todos os tempos.</p>
-        <p><strong>E-mail:</strong> gregoriocavalcanti3@gmail.com</p>
-        <p><strong>Telefone:</strong> (81) 99280-5573</p>
-        <p><strong>Instagram:</strong> <a href="https://www.instagram.com/vinildeaaz/" target="_blank">vinilsaaz</a></p>
+        <p>Oferecemos uma coleção exclusiva de vinis raros e novos, com entrega em todo o Brasil. Nosso objetivo é trazer a nostalgia da música em vinil para você, com as melhores edições e remasterizações.</p>
     </section>
 
     <footer>
-        <p>&copy; 2024 Vinil de A a Z. Todos os direitos reservados.</p>
+        <p>&copy; 2024 Vinil de A a Z</p>
     </footer>
 
     <script>
@@ -309,6 +305,24 @@
 
         function closeMenu() {
             document.getElementById("side-menu").style.width = "0";
+        }
+
+        function sortVinyls() {
+            let sortOption = document.getElementById("sort").value;
+            let vinylItems = document.querySelectorAll(".vinil-item");
+            let vinylArray = Array.from(vinylItems);
+
+            if (sortOption === "price-asc") {
+                vinylArray.sort((a, b) => a.getAttribute("data-price") - b.getAttribute("data-price"));
+            } else if (sortOption === "price-desc") {
+                vinylArray.sort((a, b) => b.getAttribute("data-price") - a.getAttribute("data-price"));
+            } else if (sortOption === "alphabetical") {
+                vinylArray.sort((a, b) => a.querySelector("h3").innerText.localeCompare(b.querySelector("h3").innerText));
+            }
+
+            // Reorganiza os vinis no DOM
+            let catalogo = document.querySelector(".catalogo");
+            vinylArray.forEach(vinyl => catalogo.appendChild(vinyl));
         }
 
         function prevSlide() {
@@ -324,26 +338,6 @@
             let next = current.nextElementSibling || document.querySelector(".carousel img:first-child");
             next.classList.add("active");
         }
-
-        // Lógica para filtrar e ordenar vinis
-        function sortVinyls() {
-            let sortBy = document.getElementById('sort').value;
-            let vinylItems = Array.from(document.querySelectorAll('.vinil-item'));
-
-            vinylItems.sort((a, b) => {
-                let priceA = parseFloat(a.getAttribute('data-price'));
-                let priceB = parseFloat(b.getAttribute('data-price'));
-
-                if (sortBy === "price-asc") return priceA - priceB;
-                if (sortBy === "price-desc") return priceB - priceA;
-                if (sortBy === "alphabetical") return a.querySelector('h3').innerText.localeCompare(b.querySelector('h3').innerText);
-            });
-
-            let catalogo = document.querySelector('.catalogo');
-            catalogo.innerHTML = '';
-            vinylItems.forEach(item => catalogo.appendChild(item));
-        }
     </script>
-
 </body>
 </html>
