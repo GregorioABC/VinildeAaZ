@@ -30,7 +30,7 @@
         .header-content {
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: center; /* Alterado para centralizar */
             width: 100%;
             padding: 0 2rem;
             margin-top: 1rem;
@@ -43,10 +43,13 @@
             color: white;
             cursor: pointer;
         }
+
         .search-bar {
             margin: 20px 0;
             display: flex;
             justify-content: center;
+            width: 100%; /* Garantir que fique centralizada */
+            padding: 0 2rem;
         }
 
         .search-bar input[type="text"] {
@@ -55,6 +58,7 @@
             width: 300px;
             border: none;
             border-radius: 5px;
+            background-color: #f5f5f5; /* Cor de fundo mais clara */
         }
 
         .sort-options {
@@ -273,19 +277,20 @@
                 const nameA = a.querySelector("h3").innerText.toLowerCase();
                 const nameB = b.querySelector("h3").innerText.toLowerCase();
 
-                if (sortBy === "price-asc") {
-                    return priceA - priceB;
-                } else if (sortBy === "price-desc") {
-                    return priceB - priceA;
-                } else if (sortBy === "alphabetical") {
-                    return nameA.localeCompare(nameB);
+                switch (sortBy) {
+                    case "price-asc":
+                        return priceA - priceB;
+                    case "price-desc":
+                        return priceB - priceA;
+                    case "alphabetical":
+                        return nameA.localeCompare(nameB);
+                    default:
+                        return 0;
                 }
             });
 
-            // Atualiza a exibição dos vinis no DOM
             vinyls.forEach(vinyl => vinylsContainer.appendChild(vinyl));
         }
     </script>
-
 </body>
 </html>
