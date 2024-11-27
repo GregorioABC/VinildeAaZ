@@ -7,7 +7,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #C68E17;
+            background-color: #c41f02;
             color: #D2691E;
             margin: 0;
             padding: 0;
@@ -87,7 +87,7 @@
         }
 
         .side-menu a:hover {
-            background-color: #333;
+            background-color: gold;
         }
 
         .side-menu .close-btn {
@@ -124,7 +124,7 @@
         }
 
         .vinil-item {
-            background-color: #fff;
+            background-color: gold;
             border-radius: 5px;
             padding: 1rem;
             width: 180px;
@@ -150,36 +150,22 @@
             width: 100%;
         }
 
-        #sobre, #carrinho {
+        #sobre {
             padding: 2rem;
             background-color: #f5f5f5;
             color: #333;
         }
 
-        #sobre h2, #carrinho h2 {
+        #sobre h2 {
             text-align: center;
             margin-bottom: 1rem;
         }
 
-        #carrinho ul {
-            list-style-type: none;
-            padding: 0;
+        #sobre p {
+            font-size: 1.2rem;
+            text-align: center;
         }
 
-        #carrinho li {
-            margin-bottom: 1rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        #carrinho button {
-            padding: 0.3rem 0.5rem;
-            border: none;
-            background-color: #D2691E;
-            color: #fff;
-            cursor: pointer;
-        }
     </style>
 </head>
 <body>
@@ -208,7 +194,6 @@
         <a href="javascript:void(0)" class="close-btn" onclick="closeMenu()">×</a>
         <a href="#catalogo">Catálogo</a>
         <a href="#sobre">Sobre Nós</a>
-        <a href="#carrinho">Carrinho</a>
         <a href="#contato">Contato</a>
     </div>
 
@@ -227,87 +212,81 @@
             <h3>Bestial Devastation</h3>
             <p>Sepultura</p>
             <p>Preço: R$150,00</p>
-            <button onclick="addToCart('Bestial Devastation', 150)">Adicionar ao Carrinho</button>
+            <button>Adicionar ao Carrinho</button>
         </div>
-    
+
         <div class="vinil-item" data-price="70">
             <img src="src/vinil2.jpg" alt="Vinil 2">
             <h3>Asas da América</h3>
             <p>Alceu Valença</p>
             <p>Preço: R$70,00</p>
-            <button onclick="addToCart('Asas da América', 70)">Adicionar ao Carrinho</button>
+            <button>Adicionar ao Carrinho</button>
         </div>
-    
+
         <div class="vinil-item" data-price="200">
             <img src="src/vinil3.jpeg" alt="Vinil 3">
             <h3>Falso Brilhante</h3>
             <p>Elis Regina</p>
-            <p>Preço: R$200,00</p>
-            <button onclick="addToCart('Falso Brilhante', 200)">Adicionar ao Carrinho</button>
+            <p>Preço: R$180,00</p>
+            <button>Adicionar ao Carrinho</button>
         </div>
-    
+
         <div class="vinil-item" data-price="180">
             <img src="src/vinil4.jpg" alt="Vinil 4">
             <h3>Abbey Road</h3>
             <p>The Beatles</p>
             <p>Preço: R$180,00</p>
-            <button onclick="addToCart('Abbey Road', 180)">Adicionar ao Carrinho</button>
+            <button>Adicionar ao Carrinho</button>
         </div>
-    
+
         <div class="vinil-item" data-price="220">
             <img src="src/vinil5.jpg" alt="Vinil 5">
             <h3>Thriller</h3>
             <p>Michael Jackson</p>
             <p>Preço: R$220,00</p>
-            <button onclick="addToCart('Thriller', 220)">Adicionar ao Carrinho</button>
+            <button>Adicionar ao Carrinho</button>
         </div>
-    
+
         <!-- Segunda linha de vinis -->
         <div class="vinil-item" data-price="130">
             <img src="src/vinil6.jpg" alt="Vinil 6">
             <h3>Turma Balão Mágico</h3>
             <p>Balão Mágico</p>
             <p>Preço: R$130,00</p>
-            <button onclick="addToCart('Turma Balão Mágico', 130)">Adicionar ao Carrinho</button>
+            <button>Adicionar ao Carrinho</button>
         </div>
-    
+
         <div class="vinil-item" data-price="90">
             <img src="src/vinil7.jpeg" alt="Vinil 7">
             <h3>O tempo não para</h3>
             <p>Cazuza</p>
             <p>Preço: R$90,00</p>
-            <button onclick="addToCart('O tempo não para', 90)">Adicionar ao Carrinho</button>
+            <button>Adicionar ao Carrinho</button>
         </div>
-    
+
         <div class="vinil-item" data-price="250">
             <img src="src/vinil8.jpeg" alt="Vinil 8">
             <h3>Fissura</h3>
-            <p>Chiclete com Banana</p>
-            <p>Preço: R$250,00</p>
-            <button onclick="addToCart('Fissura', 250)">Adicionar ao Carrinho</button>
+            <p>Chiclete com banana</p>
+            <p>Preço: R$150,00</p>
+            <button>Adicionar ao Carrinho</button>
         </div>
-    
-        <div class="vinil-item" data-price="120">
+
+        <div class="vinil-item" data-price="180">
             <img src="src/vinil9.jpeg" alt="Vinil 9">
-            <h3>A Arte de Tim Maia</h3>
+            <h3>A arte de Tim Maia</h3>
             <p>Tim Maia</p>
             <p>Preço: R$120,00</p>
-            <button onclick="addToCart('A Arte de Tim Maia', 120)">Adicionar ao Carrinho</button>
+            <button>Adicionar ao Carrinho</button>
         </div>
-    
-        <div class="vinil-item" data-price="100">
+
+        <div class="vinil-item" data-price="160">
             <img src="src/vinil10.jpeg" alt="Vinil 10">
             <h3>Promessa</h3>
             <p>Alcione</p>
             <p>Preço: R$100,00</p>
-            <button onclick="addToCart('Promessa', 100)">Adicionar ao Carrinho</button>
+            <button>Adicionar ao Carrinho</button>
         </div>
-    </section>
-
-    <section id="carrinho">
-        <h2>Carrinho</h2>
-        <ul id="cart-items"></ul>
-        <button onclick="finalizeOrder()">Finalizar Pedido</button>
     </section>
 
     <section id="sobre">
@@ -320,6 +299,15 @@
     </footer>
 
     <script>
+        // Funções do menu lateral
+        function openMenu() {
+            document.getElementById("side-menu").style.width = "250px";
+        }
+
+        function closeMenu() {
+            document.getElementById("side-menu").style.width = "0";
+        }
+
         // Funções do carrossel de imagens
         let currentSlide = 0;
         const slides = document.querySelectorAll(".carousel img");
@@ -337,46 +325,36 @@
         function nextSlide() {
             showSlide(currentSlide + 1);
         }
-        //funções carrinho
-        let cart = [];
 
-        function openMenu() {
-            document.getElementById("side-menu").style.width = "250px";
-        }
+        // Função de pesquisa
+        function searchVinyls() {
+            const searchTerm = document.getElementById("search").value.toLowerCase();
+            const vinylItems = document.querySelectorAll(".vinil-item");
 
-        function closeMenu() {
-            document.getElementById("side-menu").style.width = "0";
-        }
-
-        function addToCart(title, price) {
-            cart.push({ title, price });
-            updateCartUI();
-        }
-
-        function updateCartUI() {
-            const cartItems = document.getElementById("cart-items");
-            cartItems.innerHTML = "";
-            cart.forEach((item, index) => {
-                const li = document.createElement("li");
-                li.innerHTML = `${item.title} - R$${item.price} <button onclick="removeFromCart(${index})">Remover</button>`;
-                cartItems.appendChild(li);
+            vinylItems.forEach(item => {
+                const title = item.querySelector("h3").innerText.toLowerCase();
+                item.style.display = title.includes(searchTerm) ? "block" : "none";
             });
         }
 
-        function removeFromCart(index) {
-            cart.splice(index, 1);
-            updateCartUI();
-        }
+        // Função para ordenar vinis
+        function sortVinyls() {
+            const sortOrder = document.getElementById("sort").value;
+            const vinylContainer = document.getElementById("catalogo");
+            const vinylItems = Array.from(document.querySelectorAll(".vinil-item"));
 
-        function finalizeOrder() {
-            if (cart.length === 0) {
-                alert("O carrinho está vazio!");
-                return;
-            }
-            const whatsappNumber = "5581992805573"; // Seu número
-            const message = cart.map(item => `${item.title} - R$${item.price}`).join("\n");
-            const whatsappLink = `https://wa.me/${whatsappNumber}?text=Ola, gostaria de realizar esse pedido:%0A${encodeURIComponent(message)}`;
-            window.open(whatsappLink, "_blank");
+            vinylItems.sort((a, b) => {
+                const priceA = parseInt(a.getAttribute("data-price"));
+                const priceB = parseInt(b.getAttribute("data-price"));
+                const titleA = a.querySelector("h3").innerText;
+                const titleB = b.querySelector("h3").innerText;
+
+                if (sortOrder === "price-asc") return priceA - priceB;
+                if (sortOrder === "price-desc") return priceB - priceA;
+                if (sortOrder === "alphabetical") return titleA.localeCompare(titleB);
+            });
+
+            vinylItems.forEach(item => vinylContainer.appendChild(item));
         }
     </script>
 </body>
