@@ -49,3 +49,6 @@ Este projeto é voltado para:
 - **JavaScript**: Funcionalidades dinâmicas como pesquisa e ordenação.
 - **Font Awesome**: Ícones de interface como o ícone de menu.
 
+## Colaboradores
+- **GREGÓRIO DE ALBUQUERQUE BORBA CAVALCANTI**
+- **SÉRGIO AUGUSTO LEITE DE MELO FILHO**
